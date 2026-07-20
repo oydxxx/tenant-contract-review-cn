@@ -1,0 +1,19 @@
+{
+  "fixture": "synthetic-host-capabilities-v1",
+  "synthetic": true,
+  "generated_for": "deterministic capability-gate tests only",
+  "file_security": {
+    "real_type_identification": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "resource_limits": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "isolated_parsing": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "dangerous_content_disabled": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"}
+  },
+  "privacy": {
+    "encryption": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "case_access_control": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "ordinary_log_exclusion": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "retention_and_backup_deletion": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "user_deletion": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"},
+    "third_party_disclosure": {"status": "supported", "provider": "Synthetic Secure Host", "verification": "host attestation", "verified_at": "2026-07-20T00:00:00Z", "expires_at": "2026-08-20T00:00:00Z"}
+  }
+}

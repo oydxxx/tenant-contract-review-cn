@@ -1,0 +1,4 @@
+interface:
+  display_name: "中国大陆租房合同审查"
+  short_description: "签约前审查中国大陆住宅租赁合同风险并准备可执行的谈判方案"
+  default_prompt: "Use $tenant-contract-review-cn to review my Mainland China residential lease before signing."

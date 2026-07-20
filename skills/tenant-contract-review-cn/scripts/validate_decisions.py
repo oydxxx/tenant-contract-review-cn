@@ -8,7 +8,6 @@ dispute or prove that a legal source is current for an individual case.
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
 from typing import Any
 
@@ -120,10 +119,7 @@ def red_line_is_walk_away_eligible(
     )
 
 
-def compute_outcome(case: dict[str, Any], red_lines: dict[str, dict[str, Any]] | None = None) -> str:
-    """Apply KTD11 in order; this returns one of the four allowed outcomes."""
-    red_lines = red_lines or red_line_index()
-    unknowns = unknown_reasons(case)
+def _compute_outcome(case: dict[str, Any], red_lines: dict[str, dict[str, Any]], unknowns: list[str]) -> str:
     findings = [item for item in case.get("findings", []) if isinstance(item, dict)]
     if any(red_line_is_walk_away_eligible(finding, red_lines, unknowns) for finding in findings):
         return OUTCOME_WALK_AWAY
@@ -134,9 +130,14 @@ def compute_outcome(case: dict[str, Any], red_lines: dict[str, dict[str, Any]] |
     return OUTCOME_POSITIVE
 
 
+def compute_outcome(case: dict[str, Any], red_lines: dict[str, dict[str, Any]] | None = None) -> str:
+    """Apply KTD11 in order; this returns one of the four allowed outcomes."""
+    return _compute_outcome(case, red_lines or red_line_index(), unknown_reasons(case))
+
+
 def build_decision(case: dict[str, Any], red_lines: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
     reasons = unknown_reasons(case)
-    outcome = compute_outcome(case, red_lines)
+    outcome = _compute_outcome(case, red_lines or red_line_index(), reasons)
     findings = [item for item in case.get("findings", []) if isinstance(item, dict)]
     evidence_ids = sorted({
         *case.get("decision_evidence_ids", []),
@@ -262,12 +263,13 @@ def validate_fixtures(fixtures: Path = FIXTURES) -> list[str]:
         red_lines = red_line_index()
     except (OSError, yaml.YAMLError) as error:
         return [f"cannot load red lines: {error}"]
-    for path in sorted(fixtures.glob("decision-*.json")):
+    paths = sorted(fixtures.glob("decision-*.json"))
+    for path in paths:
         try:
             errors.extend(validate_case(load_json(path), red_lines))
         except (OSError, ValueError, json.JSONDecodeError) as error:
             errors.append(f"{path.name}: {error}")
-    if not list(fixtures.glob("decision-*.json")):
+    if not paths:
         errors.append("no decision fixtures found")
     return errors
 

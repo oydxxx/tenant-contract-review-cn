@@ -12,6 +12,7 @@ SKILL_RELATIVE_PATH = Path("skills/tenant-contract-review-cn")
 def validate_skill_package(skill_directory: Path) -> list[str]:
     """Return deterministic U1 package errors without trusting package content."""
     errors: list[str] = []
+    package_root = skill_directory.resolve()
     skill_file = skill_directory / "SKILL.md"
     if not skill_file.is_file():
         return ["SKILL.md is missing"]
@@ -36,7 +37,11 @@ def validate_skill_package(skill_directory: Path) -> list[str]:
         clean_target = target.split("#", 1)[0]
         if not clean_target or re.match(r"^[a-z][a-z0-9+.-]*:", clean_target):
             continue
-        if not (skill_directory / clean_target).resolve().is_file():
+        reference_path = Path(clean_target)
+        resolved_target = (package_root / reference_path).resolve()
+        if reference_path.is_absolute() or not resolved_target.is_relative_to(package_root):
+            errors.append(f"SKILL.md reference escapes package: {clean_target}")
+        elif not resolved_target.is_file():
             errors.append(f"SKILL.md references missing file: {clean_target}")
 
     metadata_file = skill_directory / "agents/openai.yaml"
@@ -44,7 +49,8 @@ def validate_skill_package(skill_directory: Path) -> list[str]:
         errors.append("agents/openai.yaml is missing")
     else:
         metadata = metadata_file.read_text(encoding="utf-8")
-        if "$tenant-contract-review-cn" not in metadata:
+        prompt_match = re.search(r'^  default_prompt:\s*"([^"]*)"\s*$', metadata, re.MULTILINE)
+        if not prompt_match or "$tenant-contract-review-cn" not in prompt_match.group(1):
             errors.append("default_prompt must mention $tenant-contract-review-cn")
 
     return errors
@@ -103,6 +109,19 @@ class PublicationSafetyTests(unittest.TestCase):
             validate_skill_package(copied_skill),
         )
 
+    def test_skill_rejects_reference_outside_package(self) -> None:
+        temporary_directory, copied_skill = self.copy_skill()
+        self.addCleanup(temporary_directory.cleanup)
+        outside_file = copied_skill.parent / "outside.md"
+        outside_file.write_text("outside package\n", encoding="utf-8")
+        skill_file = copied_skill / "SKILL.md"
+        content = skill_file.read_text(encoding="utf-8")
+        skill_file.write_text(content + "\n[Outside](../outside.md)\n", encoding="utf-8")
+        self.assertIn(
+            "SKILL.md reference escapes package: ../outside.md",
+            validate_skill_package(copied_skill),
+        )
+
     def test_metadata_default_prompt_names_the_skill(self) -> None:
         temporary_directory, copied_skill = self.copy_skill()
         self.addCleanup(temporary_directory.cleanup)
@@ -110,6 +129,18 @@ class PublicationSafetyTests(unittest.TestCase):
         self.assertTrue(metadata_file.is_file(), "agents/openai.yaml must exist before mutation")
         metadata = metadata_file.read_text(encoding="utf-8")
         metadata_file.write_text(metadata.replace("$tenant-contract-review-cn", "the skill"), encoding="utf-8")
+        self.assertIn(
+            "default_prompt must mention $tenant-contract-review-cn",
+            validate_skill_package(copied_skill),
+        )
+
+    def test_metadata_token_in_comment_does_not_satisfy_default_prompt(self) -> None:
+        temporary_directory, copied_skill = self.copy_skill()
+        self.addCleanup(temporary_directory.cleanup)
+        metadata_file = copied_skill / "agents/openai.yaml"
+        metadata = metadata_file.read_text(encoding="utf-8")
+        metadata = metadata.replace("$tenant-contract-review-cn", "the skill")
+        metadata_file.write_text(metadata + "# $tenant-contract-review-cn\n", encoding="utf-8")
         self.assertIn(
             "default_prompt must mention $tenant-contract-review-cn",
             validate_skill_package(copied_skill),

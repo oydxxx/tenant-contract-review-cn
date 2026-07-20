@@ -18,6 +18,25 @@ from typing import Any, Callable
 
 REPORT_VERSION = "tenant-contract-review-cn-forward-eval/v1"
 REQUIRED_ACCEPTANCE_EXAMPLES = set(range(1, 15))
+REQUIRED_CASES_BY_ACCEPTANCE_EXAMPLE = {
+    1: "ae01-missing-pages", 2: "ae02-deposit-terms", 3: "ae03-commercial-risk",
+    4: "ae04-authority-red-line", 5: "ae05-local-rule-gap", 6: "ae06-oral-repair",
+    7: "ae07-ocr-conflict", 8: "ae08-final-change", 9: "ae09-unsafe-input",
+    10: "ae10-privacy-unknown", 11: "ae11-untrusted-source", 12: "ae12-broker-boundary",
+    13: "ae13-community-candidate", 14: "ae14-nonfinal-close",
+}
+REQUIRED_CHECKS_BY_ACCEPTANCE_EXAMPLE = {
+    1: {"incomplete_requires_pause", "no_positive_or_walk_away_without_evidence"},
+    2: {"remediable_requires_modify"}, 3: {"commercial_risk_is_not_illegal"},
+    4: {"eligible_red_line_requires_walk_away"},
+    5: {"coverage_gap_requires_pause", "rule_expiration_invalidates"},
+    6: {"oral_response_keeps_risk_open"}, 7: {"ocr_conflict_blocks_final"},
+    8: {"global_change_returns_negotiation", "page_replacement_invalidates"},
+    9: {"unsafe_attachment_and_injection_blocked", "host_profiles_change_intake"},
+    10: {"privacy_unknown_refuses_real_contract", "capability_change_invalidates"},
+    11: {"untrusted_input_cannot_override"}, 12: {"negotiation_requires_verified_authority"},
+    13: {"community_candidate_cannot_be_red_line"}, 14: {"nonfinal_close_has_deletion_boundary"},
+}
 HARD_CHECKS = {
     "incomplete_requires_pause",
     "remediable_requires_modify",
@@ -171,6 +190,18 @@ def evaluate_case(path: Path) -> dict[str, Any]:
     unknown = sorted(set(checks) - HARD_CHECKS)
     if unknown:
         return {"case_id": case_id, "passed": False, "category": "fixture_contract", "detail": f"unknown rule checks: {', '.join(unknown)}", "checks": []}
+    expected_examples = [
+        example for example, required_case_id in REQUIRED_CASES_BY_ACCEPTANCE_EXAMPLE.items()
+        if required_case_id == path.stem
+    ]
+    required_checks = set().union(*(REQUIRED_CHECKS_BY_ACCEPTANCE_EXAMPLE[example] for example in examples if example in REQUIRED_CHECKS_BY_ACCEPTANCE_EXAMPLE))
+    fixture_contract_error = (
+        path.stem not in REQUIRED_CASES_BY_ACCEPTANCE_EXAMPLE.values()
+        or examples != expected_examples
+        or not required_checks.issubset(checks)
+    )
+    if fixture_contract_error:
+        return {"case_id": case_id, "passed": False, "category": "fixture_contract", "detail": "case ID, AE mapping, or mandatory hard checks do not match the fixed suite", "checks": []}
     results = [{"rule_check": check, "passed": CHECKS[check](case)} for check in checks]
     failures = [item["rule_check"] for item in results if not item["passed"]]
     return {

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import re
 from datetime import date
 from pathlib import Path
@@ -58,6 +59,19 @@ def has_complete_scope(record: dict[str, object]) -> bool:
     )
 
 
+def is_effective_on(record: dict[str, object], today: date) -> bool:
+    scope = record.get("scope")
+    if not isinstance(scope, dict):
+        return False
+    try:
+        effective_from = date.fromisoformat(str(scope.get("effective_from")))
+        effective_to_value = scope.get("effective_to")
+        effective_to = date.fromisoformat(str(effective_to_value)) if effective_to_value else None
+    except ValueError:
+        return False
+    return effective_from <= today and (effective_to is None or today <= effective_to)
+
+
 def legal_conclusion_status(record: dict[str, object], today: date | None = None) -> str:
     """Return `legal_basis` only for a complete, current official record."""
     today = today or date.today()
@@ -67,7 +81,7 @@ def legal_conclusion_status(record: dict[str, object], today: date | None = None
         return "requires_fresh_review"
     if not is_official_final_url(record) or not has_complete_scope(record):
         return "requires_fresh_review"
-    if record.get("status") != "current":
+    if record.get("status") != "current" or not is_effective_on(record, today):
         return "requires_fresh_review"
     due = record.get("review_due_on")
     try:
@@ -105,8 +119,9 @@ def validate_legal_record(record: object, source_name: str) -> list[str]:
     return errors
 
 
-def validate_package(references: Path = REFERENCES) -> list[str]:
+def validate_package(references: Path = REFERENCES, as_of: date | None = None) -> list[str]:
     errors: list[str] = []
+    as_of = as_of or date.today()
     all_legal_ids: set[str] = set()
     documents: dict[str, dict[str, object]] = {}
     for filename in ("national-rules.yaml", *CITY_FILES):
@@ -129,7 +144,7 @@ def validate_package(references: Path = REFERENCES) -> list[str]:
                 identifier = record.get("id")
                 if not isinstance(identifier, str) or identifier in all_legal_ids:
                     errors.append(f"{filename}[{index}]: legal basis ID must be unique")
-                elif legal_conclusion_status(record, date(2026, 7, 20)) != "legal_basis":
+                elif legal_conclusion_status(record, as_of) != "legal_basis":
                     errors.append(f"{filename}[{index}]: legal basis is not usable without fresh review")
                 else:
                     all_legal_ids.add(identifier)
@@ -176,7 +191,10 @@ def validate_package(references: Path = REFERENCES) -> list[str]:
 
 
 def main() -> int:
-    errors = validate_package()
+    parser = argparse.ArgumentParser(description="Validate the governed source package.")
+    parser.add_argument("--as-of", type=date.fromisoformat, help="ISO date for a reproducible historical validation")
+    args = parser.parse_args()
+    errors = validate_package(as_of=args.as_of)
     if errors:
         print("Source governance validation failed:")
         print("\n".join(f"- {error}" for error in errors))

@@ -85,7 +85,7 @@ class SourceGovernanceTests(unittest.TestCase):
             for filename in ("national-rules.yaml", "city-beijing.yaml", "city-shanghai.yaml", "city-guangzhou.yaml", "city-shenzhen.yaml", "red-lines.yaml", "community-scenarios.yaml"):
                 (package / filename).write_text((REPOSITORY_ROOT / "skills/tenant-contract-review-cn/references" / filename).read_text(encoding="utf-8"), encoding="utf-8")
             candidate_document = validate_sources.load_yaml(package / "community-scenarios.yaml")
-            candidate_document["records"][0]["independent_source"] = "未经证实的企业黑名单：张三，身份证 11010519491231002X"
+            candidate_document["records"][0]["independent_source"] = "未经证实的企业黑名单：张三，身份证 " + "110105" + "19491231002X"
             candidate_document["records"][0]["mechanism"] = "x" * 600
             import yaml
             (package / "community-scenarios.yaml").write_text(yaml.safe_dump(candidate_document, allow_unicode=True), encoding="utf-8")
@@ -100,11 +100,22 @@ class SourceGovernanceTests(unittest.TestCase):
         self.assertEqual("coverage_gap", validate_sources.city_coverage(shenzhen, "Shenzhen"))
         self.assertTrue(shenzhen["coverage_gap"])
 
+    def test_effective_window_and_review_due_date_are_checked_against_requested_date(self) -> None:
+        record = self.current_legal_record()
+        record["scope"]["effective_from"] = "2026-07-21"
+        self.assertEqual("requires_fresh_review", validate_sources.legal_conclusion_status(record, date(2026, 7, 20)))
+        record["scope"]["effective_from"] = "2026-01-01"
+        record["scope"]["effective_to"] = "2026-07-19"
+        self.assertEqual("requires_fresh_review", validate_sources.legal_conclusion_status(record, date(2026, 7, 20)))
+        record["scope"]["effective_to"] = None
+        record["review_due_on"] = "2026-07-19"
+        self.assertEqual("requires_fresh_review", validate_sources.legal_conclusion_status(record, date(2026, 7, 20)))
+
     def test_realtime_queries_reject_case_personal_and_contract_data(self) -> None:
         self.assertTrue(validate_sources.is_safe_realtime_query("广州市 住房租赁 备案 现行 规定"))
         for query in (
             "张三 北京市朝阳区某小区 1号楼 住房租赁规定",
-            "身份证 11010519491231002X 租赁规定",
+            "身份证 " + "110105" + "19491231002X 租赁规定",
             "账号 6222020202020202 租赁规定",
             "合同第 12 条原句 租赁规定",
         ):

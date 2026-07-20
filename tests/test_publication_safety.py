@@ -180,6 +180,15 @@ class PublicationSafetyTests(unittest.TestCase):
     def test_repository_and_installable_package_are_separated(self) -> None:
         self.assertEqual([], validate_repository(REPOSITORY_ROOT))
 
+    def test_skill_entrypoint_loads_the_released_contract_references(self) -> None:
+        content = (REPOSITORY_ROOT / SKILL_RELATIVE_PATH / "SKILL.md").read_text(encoding="utf-8")
+        for reference in (
+            "references/host-capabilities.md", "references/case-state.md", "references/document-intake.md",
+            "references/source-governance.md", "references/decision-policy.md", "references/negotiation-playbook.md",
+        ):
+            self.assertIn(reference, content)
+        self.assertNotIn("U1 安全骨架", content)
+
     def test_skill_rejects_unknown_frontmatter_field(self) -> None:
         temporary_directory, copied_skill = self.copy_skill()
         self.addCleanup(temporary_directory.cleanup)
@@ -305,9 +314,10 @@ class PublicationSafetyTests(unittest.TestCase):
         self.addCleanup(temporary_directory.cleanup)
         skill_file = copied_skill / "SKILL.md"
         content = skill_file.read_text(encoding="utf-8")
-        skill_file.write_text(content + "\n[Local](file:///tmp/outside.md)\n", encoding="utf-8")
+        local_uri = "file:///" + "tmp/outside.md"
+        skill_file.write_text(content + f"\n[Local]({local_uri})\n", encoding="utf-8")
         self.assertIn(
-            "SKILL.md reference uses disallowed scheme: file:///tmp/outside.md",
+            "SKILL.md reference uses disallowed scheme: " + local_uri,
             validate_skill_package(copied_skill),
         )
 

@@ -71,10 +71,6 @@ def _is_fixture(relative_path: Path) -> bool:
     return len(relative_path.parts) >= 2 and relative_path.parts[:2] == ("tests", "fixtures") and relative_path.suffix in FIXTURE_SUFFIXES
 
 
-def _is_test_code(relative_path: Path) -> bool:
-    return relative_path.parts[:1] == ("tests",) and relative_path.name.startswith("test_") and relative_path.suffix == ".py"
-
-
 def _contains_synthetic_marker(content: str) -> bool:
     return bool(re.search(r'(?im)(?:["\']synthetic["\']\s*:\s*true\b|^\s*synthetic\s*:\s*true\b)', content))
 
@@ -97,8 +93,6 @@ def validate_publication(repository_root: Path = REPOSITORY_ROOT) -> list[str]:
             errors.append(f"{display_path}: forbidden work, temporary, output, or host-log artifact")
         if relative_path.name.lower() in FORBIDDEN_FILENAMES or relative_path.suffix.lower() in {".log", ".sqlite", ".sqlite3"}:
             errors.append(f"{display_path}: forbidden secret, log, or local-state artifact")
-        if _is_test_code(relative_path):
-            continue
         content = _read_text(path)
         if content is None:
             errors.append(f"{display_path}: non-text file cannot be reviewed for public release")

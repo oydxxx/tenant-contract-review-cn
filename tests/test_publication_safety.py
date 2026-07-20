@@ -2,6 +2,7 @@ import re
 import shutil
 import tempfile
 import unittest
+import importlib.util
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -11,6 +12,11 @@ import yaml
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SKILL_RELATIVE_PATH = Path("skills/tenant-contract-review-cn")
 ALLOWED_REMOTE_REFERENCE_SCHEMES = {"http", "https", "mailto"}
+PUBLICATION_SCRIPT = REPOSITORY_ROOT / "skills/tenant-contract-review-cn/scripts/validate_publication.py"
+PUBLICATION_SPEC = importlib.util.spec_from_file_location("validate_publication", PUBLICATION_SCRIPT)
+assert PUBLICATION_SPEC and PUBLICATION_SPEC.loader
+validate_publication = importlib.util.module_from_spec(PUBLICATION_SPEC)
+PUBLICATION_SPEC.loader.exec_module(validate_publication)
 
 
 class DuplicateKeyError(yaml.YAMLError):
@@ -418,6 +424,62 @@ class PublicationSafetyTests(unittest.TestCase):
             "agents/openai.yaml interface.default_prompt must be a non-empty string",
             validate_skill_package(copied_skill),
         )
+
+
+class PublicationLeakageTests(unittest.TestCase):
+    def scan_temporary_tree(self, relative_path: str, content: str) -> list[str]:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            target = root / relative_path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(content, encoding="utf-8")
+            return validate_publication.validate_publication(root)
+
+    def test_current_public_manifest_passes(self) -> None:
+        self.assertEqual([], validate_publication.validate_publication(REPOSITORY_ROOT))
+
+    def test_fixture_without_explicit_synthetic_marker_fails(self) -> None:
+        errors = self.scan_temporary_tree("tests/fixtures/synthetic/case.json", '{"case": "example"}\n')
+        self.assertIn("tests/fixtures/synthetic/case.json: fixture lacks explicit synthetic: true marker", errors)
+
+    def test_marked_fixture_can_pass_the_publication_scan(self) -> None:
+        self.assertEqual(
+            [],
+            self.scan_temporary_tree("tests/fixtures/synthetic/case.json", '{"synthetic": true, "case": "example"}\n'),
+        )
+
+    def test_absolute_path_token_and_identity_number_fail(self) -> None:
+        local_path = "/" + "Users/example/contract.pdf"
+        token = "gh" + "p_" + "A" * 36
+        identity_number = "110105" + "19491231" + "002X"
+        errors = self.scan_temporary_tree(
+            "examples/release-check.txt",
+            f"path={local_path}\ntoken={token}\nidentity={identity_number}\n",
+        )
+        self.assertTrue(any("local absolute path" in error for error in errors))
+        self.assertTrue(any("GitHub token" in error for error in errors))
+        self.assertTrue(any("identity number" in error for error in errors))
+
+    def test_work_temporary_and_log_artifacts_fail(self) -> None:
+        for relative_path in ("work/session.json", "temp/eval.json", "host-logs/host.log"):
+            with self.subTest(relative_path=relative_path):
+                errors = self.scan_temporary_tree(relative_path, "synthetic test output\n")
+                self.assertTrue(any("forbidden" in error for error in errors))
+
+    def test_privacy_contract_blocks_untrusted_and_undisclosed_real_material_paths(self) -> None:
+        privacy = (REPOSITORY_ROOT / "skills/tenant-contract-review-cn/references/privacy-safety.md").read_text(encoding="utf-8")
+        self.assertIn("不可信数据", privacy)
+        self.assertIn("不能改变安全门禁", privacy)
+        self.assertIn("processor", privacy)
+        self.assertIn("training_opt_out_verified", privacy)
+        self.assertIn("不得读取或传输未经充分脱敏的真实材料", privacy)
+
+    def test_log_minimization_and_deletion_never_claim_success_without_receipt(self) -> None:
+        privacy = (REPOSITORY_ROOT / "skills/tenant-contract-review-cn/references/privacy-safety.md").read_text(encoding="utf-8")
+        self.assertIn("案件 ID、材料摘要（不得含原文）、阶段、门禁结果、错误分类与耗时", privacy)
+        self.assertIn("绝不伪造删除成功或删除凭证", privacy)
+        security = (REPOSITORY_ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        self.assertIn("自动扫描是发布门槛，不替代人工审阅", security)
 
 
 if __name__ == "__main__":

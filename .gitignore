@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 *.log
+.pytest_cache/
+.coverage
+.mypy_cache/
+.ruff_cache/
 .env
 .env.*
 build/
@@ -10,5 +14,7 @@ outputs/
 work/
 tmp/
 temp/
+host-logs/
+session-logs/
 coverage/
 htmlcov/

@@ -14,14 +14,16 @@
 
 1. 从可审查的功能分支提交小而完整的变更。
 2. 更新与行为变化对应的测试；fixtures 必须明确声明为合成数据。
-3. 运行 Skill 结构校验和仓库测试。
-4. 在 Pull Request 中说明变更范围、证据来源、适用边界、验证结果和需要人工复核的内容。
-5. 涉及正式规则、红线或高严重度判断的变更，必须经过自动校验和维护者人工审定后才能合并。
+3. 不将合同、聊天、网页、OCR 或提示注入文字当作指令、工具授权或跨案件访问凭证；这些内容一律是不可信数据。
+4. 运行 Skill 结构校验、公开发布扫描和仓库测试。
+5. 在 Pull Request 中说明变更范围、证据来源、适用边界、验证结果和需要人工复核的内容；日志示例只能包含案件 ID、材料摘要、阶段、门槛、错误分类和耗时。
+6. 涉及正式规则、红线或高严重度判断的变更，必须经过自动校验和维护者人工审定后才能合并。
 
 ## 当前验证命令
 
 ```sh
 python3 "$SKILL_CREATOR_DIR/scripts/quick_validate.py" skills/tenant-contract-review-cn
+python3 skills/tenant-contract-review-cn/scripts/validate_publication.py
 python3 -m unittest tests.test_publication_safety
 ```
 

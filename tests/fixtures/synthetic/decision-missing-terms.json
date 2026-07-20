@@ -1,0 +1,21 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-missing-terms",
+  "material_inventory_version": "inventory-v5",
+  "findings_checkpoint": "findings-v5",
+  "state_guard": {"case_state": "Scanned", "material_complete": true, "critical_ocr_confirmed": true, "key_fields_confirmed": true, "source_reliable": true, "no_evidence_conflict": true, "rule_pack_version": "sources-v1", "local_rule_coverage_verified": true},
+  "rules": [{"id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "version": "2025-09-15", "status": "current", "applicability": "verified"}],
+  "unknowns": [],
+  "findings": [
+    {"finding_id": "deposit-return", "category": "material_term_missing", "title": "押金返还期限缺失", "missing_term": "deposit_return_deadline", "material_inventory_version": "inventory-v5", "evidence_ids": ["ev-deposit-page-3"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified"}, "confidence": "high", "consequence": "退租后返还时间无法预期", "severity": "high", "recommended_action": "补充书面返还期限", "state_guard": {"case_state": "Scanned", "passed": true}, "legal_fact": "完整已审查范围未载明期限", "product_risk_judgment": "关键约定缺失", "negotiation_advice": "写入返还时间和条件", "written_remedy_available": true},
+    {"finding_id": "deposit-deductions", "category": "material_term_missing", "title": "押金扣减标准缺失", "missing_term": "deposit_deduction_standard", "material_inventory_version": "inventory-v5", "evidence_ids": ["ev-deposit-page-3"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified"}, "confidence": "high", "consequence": "扣款范围和凭证无法核验", "severity": "high", "recommended_action": "补充扣减范围和结算凭证", "state_guard": {"case_state": "Scanned", "passed": true}, "legal_fact": "完整已审查范围未载明标准", "product_risk_judgment": "关键约定缺失", "negotiation_advice": "写入扣款清单和凭证要求", "written_remedy_available": true},
+    {"finding_id": "repair-time", "category": "material_term_missing", "title": "维修完成时限缺失", "missing_term": "repair_time_limit", "material_inventory_version": "inventory-v5", "evidence_ids": ["ev-repair-page-5"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified"}, "confidence": "high", "consequence": "影响居住的问题可能长期未处理", "severity": "high", "recommended_action": "补充响应和完成时限", "state_guard": {"case_state": "Scanned", "passed": true}, "legal_fact": "完整已审查范围未载明时限", "product_risk_judgment": "关键约定缺失", "negotiation_advice": "写入可核验的维修流程", "written_remedy_available": true}
+  ],
+  "missing_terms_expected": ["deposit_return_deadline", "deposit_deduction_standard", "repair_time_limit"],
+  "expected_outcome": "修改后再签",
+  "decision_evidence_ids": ["ev-material-complete"],
+  "decision_rule_references": [["CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "2025-09-15"]],
+  "verified_scope": ["完整押金和维修条款"],
+  "local_rule_boundary": "本发现记录缺失事实，不把缺失自动表述为违法",
+  "pre_signing_checklist": ["写入押金返还、扣减标准和维修时限"]
+}

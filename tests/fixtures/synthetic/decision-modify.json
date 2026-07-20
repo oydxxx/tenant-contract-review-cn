@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-modify",
+  "material_inventory_version": "inventory-v4",
+  "findings_checkpoint": "findings-v4",
+  "state_guard": {"case_state": "Scanned", "material_complete": true, "critical_ocr_confirmed": true, "key_fields_confirmed": true, "source_reliable": true, "no_evidence_conflict": true, "rule_pack_version": "sources-v1", "local_rule_coverage_verified": true},
+  "rules": [{"id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "version": "2025-09-15", "status": "current", "applicability": "verified"}],
+  "unknowns": [],
+  "findings": [{"finding_id": "early-termination-penalty", "category": "tenant_unfavorable_but_not_necessarily_unlawful", "title": "提前解除约定的固定违约责任明显偏重", "material_inventory_version": "inventory-v4", "evidence_ids": ["ev-clause-12"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified", "geography": "Mainland China", "time": "verified", "subject": "housing tenant", "topic": "residential leasing"}, "confidence": "high", "consequence": "工作调动时可能承担难以预估的成本", "severity": "high", "recommended_action": "将责任改为明确、对等并可核验的书面计算方式", "state_guard": {"case_state": "Scanned", "passed": true}, "legal_fact": "合同已载明固定责任", "product_risk_judgment": "条款对租客明显不利但本记录不作当然无效判断", "negotiation_advice": "提出书面替换条款并核对关联违约条款", "written_remedy_available": true}],
+  "expected_outcome": "修改后再签",
+  "decision_evidence_ids": ["ev-material-complete"],
+  "decision_rule_references": [["CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "2025-09-15"]],
+  "verified_scope": ["完整提前解约条款"],
+  "local_rule_boundary": "未以示范文本偏离推定违法",
+  "pre_signing_checklist": ["将修改写入拟签文件后复核"]
+}

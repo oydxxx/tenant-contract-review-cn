@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-walk-away",
+  "material_inventory_version": "inventory-v3",
+  "findings_checkpoint": "findings-v3",
+  "state_guard": {"case_state": "Scanned", "material_complete": true, "critical_ocr_confirmed": true, "key_fields_confirmed": true, "source_reliable": true, "no_evidence_conflict": true, "rule_pack_version": "sources-v1", "local_rule_coverage_verified": true},
+  "rules": [{"id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "version": "2025-09-15", "status": "current", "applicability": "verified"}],
+  "unknowns": [],
+  "findings": [{"finding_id": "authority-refusal", "category": "possibly_unlawful_or_invalid", "title": "出租权限未获最小凭证且拒绝补正", "material_inventory_version": "inventory-v3", "evidence_ids": ["ev-authority-request", "ev-refusal"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified", "geography": "Mainland China", "time": "verified", "subject": "housing lessor", "topic": "residential leasing"}, "confidence": "high", "consequence": "可能向无出租权主体付款并无法稳定取得房屋使用", "severity": "high", "recommended_action": "停止付款并要求与本房屋相关的最小授权或权利凭证", "state_guard": {"case_state": "Scanned", "passed": true}, "legal_fact": "已记录拒绝补正和材料冲突", "product_risk_judgment": "满足预定义红线的证据门槛", "negotiation_advice": "无可接受书面补救时退出", "red_line_id": "RL-UNVERIFIED-LESSOR-AUTHORITY", "red_line_established": true, "minimum_evidence_satisfied": true, "counterevidence_present": false, "refusal_or_no_acceptable_remedy": true, "written_remedy_available": false}],
+  "expected_outcome": "建议放弃",
+  "decision_evidence_ids": ["ev-material-complete"],
+  "decision_rule_references": [["CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "2025-09-15"]],
+  "verified_scope": ["完整主合同与附件", "出租权最小凭证请求及拒绝"],
+  "local_rule_boundary": "全国规则适用已核实；未作超出范围的地方结论",
+  "pre_signing_checklist": ["不要向未经核实主体付款"]
+}

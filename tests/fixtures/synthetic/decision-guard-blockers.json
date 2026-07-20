@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-guard-blockers",
+  "material_inventory_version": "inventory-v7",
+  "findings_checkpoint": "findings-v7",
+  "state_guard": {"case_state": "Scanned", "material_complete": false, "critical_ocr_confirmed": false, "key_fields_confirmed": false, "source_reliable": true, "no_evidence_conflict": true, "rule_pack_version": "sources-v1", "local_rule_coverage_verified": false},
+  "rules": [{"id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "version": "2025-09-15", "status": "expired", "applicability": "unverified"}],
+  "unknowns": ["missing-annex"],
+  "findings": [{"finding_id": "unconfirmed-red-line", "category": "possibly_unlawful_or_invalid", "title": "未确认字段不能支持红线", "material_inventory_version": "inventory-v7", "evidence_ids": ["ev-ocr-low-confidence"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "unverified"}, "confidence": "unconfirmed", "consequence": "当前不能确认出租权事实", "severity": "high", "recommended_action": "补齐材料、确认 OCR 并复核规则", "state_guard": {"case_state": "Scanned", "passed": false}, "legal_fact": "OCR 与可见文本冲突", "product_risk_judgment": "守卫失败", "negotiation_advice": "不得以口头说明代替补证", "red_line_id": "RL-UNVERIFIED-LESSOR-AUTHORITY", "red_line_established": true, "minimum_evidence_satisfied": false, "counterevidence_present": false, "refusal_or_no_acceptable_remedy": true, "written_remedy_available": false}],
+  "expected_outcome": "暂停签约并核实",
+  "decision_evidence_ids": ["ev-material-inventory"],
+  "decision_rule_references": [["CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "2025-09-15"]],
+  "verified_scope": ["已读取部分页面"],
+  "local_rule_boundary": "规则过期且地方覆盖未核实",
+  "pre_signing_checklist": ["补传附件", "确认关键 OCR", "复核当前规则"]
+}

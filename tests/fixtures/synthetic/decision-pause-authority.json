@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-pause-authority",
+  "material_inventory_version": "inventory-v2",
+  "findings_checkpoint": "findings-v2",
+  "state_guard": {"case_state": "Scanned", "material_complete": true, "critical_ocr_confirmed": true, "key_fields_confirmed": true, "source_reliable": true, "no_evidence_conflict": true, "rule_pack_version": "sources-v1", "local_rule_coverage_verified": true},
+  "rules": [{"id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "version": "2025-09-15", "status": "current", "applicability": "verified"}],
+  "unknowns": ["actual-payee-authority"],
+  "findings": [{"finding_id": "actual-payee", "category": "external_verification_required", "title": "实际收款人与合同主体关系未知", "material_inventory_version": "inventory-v2", "evidence_ids": ["ev-payment-clause", "ev-payee-account-tail"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified", "geography": "Mainland China", "time": "verified", "subject": "housing lessor", "topic": "residential leasing"}, "confidence": "low", "consequence": "款项可能支付给无收款授权的主体", "severity": "high", "recommended_action": "核实收款授权、收费范围和书面依据", "state_guard": {"case_state": "Scanned", "passed": false}, "legal_fact": "现有材料仅显示账户尾号", "product_risk_judgment": "收款关系不能默认成立", "negotiation_advice": "要求合同主体一致的收款路径或书面授权", "written_remedy_available": false}],
+  "expected_outcome": "暂停签约并核实",
+  "decision_evidence_ids": ["ev-material-complete"],
+  "decision_rule_references": [["CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "2025-09-15"]],
+  "verified_scope": ["合同收款条款"],
+  "local_rule_boundary": "地方收费规则未作为确定性依据",
+  "pre_signing_checklist": ["向合同主体核验收款授权和收费依据"]
+}

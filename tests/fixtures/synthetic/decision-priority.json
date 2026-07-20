@@ -1,0 +1,19 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-priority",
+  "material_inventory_version": "inventory-v6",
+  "findings_checkpoint": "findings-v6",
+  "state_guard": {"case_state": "Scanned", "material_complete": true, "critical_ocr_confirmed": true, "key_fields_confirmed": true, "source_reliable": true, "no_evidence_conflict": true, "rule_pack_version": "sources-v1", "local_rule_coverage_verified": true},
+  "rules": [{"id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "version": "2025-09-15", "status": "current", "applicability": "verified"}],
+  "unknowns": ["local-fee-rule-applicability"],
+  "findings": [
+    {"finding_id": "authority-red-line-with-unknown", "category": "possibly_unlawful_or_invalid", "title": "权限红线主张尚有未知", "material_inventory_version": "inventory-v6", "evidence_ids": ["ev-authority-request", "ev-refusal"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified"}, "confidence": "high", "consequence": "存在重大交易风险", "severity": "high", "recommended_action": "先核实未知事项", "state_guard": {"case_state": "Scanned", "passed": false}, "legal_fact": "有拒绝记录但仍有地方费用规则未知", "product_risk_judgment": "不能越过红线不确定性", "negotiation_advice": "补证后重算", "red_line_id": "RL-UNVERIFIED-LESSOR-AUTHORITY", "red_line_established": true, "minimum_evidence_satisfied": true, "counterevidence_present": false, "refusal_or_no_acceptable_remedy": true, "written_remedy_available": false},
+    {"finding_id": "repair-remedy", "category": "tenant_unfavorable_but_not_necessarily_unlawful", "title": "维修书面条款可补救", "material_inventory_version": "inventory-v6", "evidence_ids": ["ev-repair"], "rule_id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "rule_version": "2025-09-15", "applicability": {"status": "verified"}, "confidence": "high", "consequence": "维修责任不清", "severity": "medium", "recommended_action": "书面修改", "state_guard": {"case_state": "Scanned", "passed": true}, "legal_fact": "合同条款存在", "product_risk_judgment": "可补救", "negotiation_advice": "提出替换文本", "written_remedy_available": true}
+  ],
+  "expected_outcome": "暂停签约并核实",
+  "decision_evidence_ids": ["ev-material-complete"],
+  "decision_rule_references": [["CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "2025-09-15"]],
+  "verified_scope": ["已提交材料"],
+  "local_rule_boundary": "地方费用规则适用性未核实",
+  "pre_signing_checklist": ["核实地方费用规则和收费依据"]
+}

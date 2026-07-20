@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-positive-trace",
+  "material_inventory_version": "inventory-v8",
+  "findings_checkpoint": "findings-v8",
+  "state_guard": {"case_state": "Scanned", "material_complete": true, "critical_ocr_confirmed": true, "key_fields_confirmed": true, "source_reliable": true, "no_evidence_conflict": true, "rule_pack_version": "sources-v1", "local_rule_coverage_verified": true},
+  "rules": [{"id": "CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "version": "2025-09-15", "status": "current", "applicability": "verified"}],
+  "unknowns": [],
+  "findings": [],
+  "expected_outcome": "基于已提交并核实的材料，未发现需要阻止签约的重大风险",
+  "decision_evidence_ids": ["ev-complete-material", "ev-confirmed-key-fields"],
+  "decision_rule_references": [["CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025", "2025-09-15"]],
+  "verified_scope": ["已提交的完整主合同和附件", "关键字段确认", "全国规则适用性"],
+  "local_rule_boundary": "仅在已核实的全国规则范围内；地方规则覆盖边界已披露",
+  "pre_signing_checklist": ["签前再次核对最终拟签文件版本", "保存书面付款和交付凭证"]
+}

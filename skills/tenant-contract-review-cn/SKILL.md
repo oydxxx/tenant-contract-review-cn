@@ -3,7 +3,7 @@ name: tenant-contract-review-cn
 description: Review Mainland China residential lease materials before signing, separate legal facts from contract risks and unknowns, prepare clause changes and negotiation guidance, and support a bounded signing decision. Use when a residential tenant in Mainland China asks to inspect a lease PDF, contract photos, redacted text, proposed revisions, or a counterparty response before signing.
 ---
 
-# 中国大陆住宅租赁合同审查与谈判
+# 租房合同避坑助手
 
 ## 执行顺序
 

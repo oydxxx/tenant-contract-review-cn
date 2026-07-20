@@ -391,10 +391,12 @@ class PublicationSafetyTests(unittest.TestCase):
         metadata_file = copied_skill / "agents/openai.yaml"
         metadata = metadata_file.read_text(encoding="utf-8")
         metadata_file.write_text(
-            metadata.replace(
-                '  display_name: "中国大陆租房合同审查"',
-                '  display_name: "中国大陆租房合同审查"\n  display_name: "decoy"',
-                1,
+            re.sub(
+                r'^  display_name: .+$',
+                '  display_name: "租房合同避坑助手"\n  display_name: "decoy"',
+                metadata,
+                count=1,
+                flags=re.MULTILINE,
             ),
             encoding="utf-8",
         )
@@ -413,7 +415,7 @@ class PublicationSafetyTests(unittest.TestCase):
         metadata_file = copied_skill / "agents/openai.yaml"
         metadata = metadata_file.read_text(encoding="utf-8")
         metadata_file.write_text(
-            metadata.replace('  display_name: "中国大陆租房合同审查"', '  display_name: ""', 1),
+            re.sub(r'^  display_name: .+$', '  display_name: ""', metadata, count=1, flags=re.MULTILINE),
             encoding="utf-8",
         )
         self.assertIn(

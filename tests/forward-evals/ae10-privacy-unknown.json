@@ -1,0 +1,17 @@
+{
+  "synthetic": true,
+  "case_id": "ae10-privacy-unknown",
+  "acceptance_examples": [10],
+  "rule_checks": ["privacy_unknown_refuses_real_contract", "capability_change_invalidates"],
+  "privacy_capability": "unknown",
+  "real_contract_accepted": false,
+  "host_deletion_promised": false,
+  "allowed_input": "redacted_pasted_text_only",
+  "invalidation": {
+    "event": "capability_changed",
+    "old_decision_checkpoint": true,
+    "downstream_invalidated": true,
+    "next_state": "Preflight"
+  },
+  "manual_review": ["核对 Skill 与宿主删除边界的实际披露"]
+}

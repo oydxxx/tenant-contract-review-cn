@@ -1,0 +1,47 @@
+name: Validate public Skill package
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install declared YAML prerequisite
+        run: python -m pip install --disable-pip-version-check PyYAML
+
+      - name: Validate installable Skill package structure
+        run: python -m unittest tests.test_publication_safety
+
+      - name: Run deterministic unit tests
+        run: python -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Validate governed sources
+        run: python skills/tenant-contract-review-cn/scripts/validate_sources.py
+
+      - name: Validate decision invariants
+        run: python skills/tenant-contract-review-cn/scripts/validate_decisions.py
+
+      - name: Scan the public release manifest
+        run: python skills/tenant-contract-review-cn/scripts/validate_publication.py
+
+      - name: Run synthetic forward evaluations
+        run: python scripts/run_forward_evals.py --cases tests/forward-evals --output build/eval-report.json
+
+      - name: Upload versioned forward-evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: forward-evaluation-report
+          path: build/eval-report.json
+          if-no-files-found: error

@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "case_id": "ae09-unsafe-input",
+  "acceptance_examples": [9],
+  "rule_checks": ["unsafe_attachment_and_injection_blocked", "host_profiles_change_intake"],
+  "dangerous_content_blocked": true,
+  "attachment_content_read": false,
+  "instruction_treated_as_untrusted": true,
+  "host_profiles": [
+    {"file_security": false, "privacy": false},
+    {"file_security": true, "privacy": true}
+  ],
+  "manual_review": ["核对敏感信息最小化、第三方披露与非训练用途说明"]
+}

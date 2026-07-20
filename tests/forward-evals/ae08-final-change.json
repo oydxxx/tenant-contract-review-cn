@@ -1,0 +1,17 @@
+{
+  "synthetic": true,
+  "case_id": "ae08-final-change",
+  "acceptance_examples": [8],
+  "rule_checks": ["global_change_returns_negotiation", "page_replacement_invalidates"],
+  "full_review_protocol_complete": true,
+  "material_change": true,
+  "state": "Negotiation",
+  "final_conclusion": null,
+  "invalidation": {
+    "event": "page_replaced",
+    "old_decision_checkpoint": true,
+    "downstream_invalidated": true,
+    "next_state": "AwaitingConfirmation"
+  },
+  "manual_review": ["逐项比较三项修改、附件与新增违约责任"]
+}

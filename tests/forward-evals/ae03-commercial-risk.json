@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "case_id": "ae03-commercial-risk",
+  "acceptance_examples": [3],
+  "rule_checks": ["commercial_risk_is_not_illegal"],
+  "legal_basis_verified": false,
+  "risk_label": "commercial_or_performance_risk",
+  "outcome": "修改后再签",
+  "manual_review": ["复核风险语言没有越界成违法或无效结论"]
+}

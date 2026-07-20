@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "case_id": "ae07-ocr-conflict",
+  "acceptance_examples": [7],
+  "rule_checks": ["ocr_conflict_blocks_final"],
+  "critical_ocr_confirmed": false,
+  "state": "AwaitingConfirmation",
+  "final_conclusion": null,
+  "manual_review": ["人工确认押金转录与提前搬离目标是否完整"]
+}

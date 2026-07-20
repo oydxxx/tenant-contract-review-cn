@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "case_id": "ae02-deposit-terms",
+  "acceptance_examples": [2],
+  "rule_checks": ["remediable_requires_modify"],
+  "written_remedy": true,
+  "outcome": "修改后再签",
+  "evidence_ids": ["synthetic-page-02", "synthetic-finding-deposit"],
+  "manual_review": ["检查补充条款是否与整份合同的扣款定义联动"]
+}

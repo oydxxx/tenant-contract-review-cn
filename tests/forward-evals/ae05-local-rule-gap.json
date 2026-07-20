@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "ae05-local-rule-gap",
+  "acceptance_examples": [5],
+  "rule_checks": ["coverage_gap_requires_pause", "rule_expiration_invalidates"],
+  "local_coverage": "gap",
+  "rule_status": "expired",
+  "outcome": "暂停签约并核实",
+  "invalidation": {
+    "event": "rule_expired",
+    "old_decision_checkpoint": true,
+    "downstream_invalidated": true,
+    "next_state": "Preflight"
+  },
+  "manual_review": ["核对全国规则的适用边界与官方确认渠道"]
+}

@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "ae04-authority-red-line",
+  "acceptance_examples": [4],
+  "rule_checks": ["eligible_red_line_requires_walk_away"],
+  "red_line_gates": {
+    "material_complete": true,
+    "facts_confirmed": true,
+    "minimum_evidence": true,
+    "rule_current": true,
+    "no_counterevidence": true,
+    "remedy_refused": true
+  },
+  "outcome": "建议放弃",
+  "manual_review": ["复核红线证据链和拒绝补正记录"]
+}

@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "case_id": "ae14-nonfinal-close",
+  "acceptance_examples": [14],
+  "rule_checks": ["nonfinal_close_has_deletion_boundary"],
+  "state": "NonFinalClosed",
+  "final_conclusion": null,
+  "coverage_scope": ["synthetic-page-01"],
+  "unknowns": ["missing-pages", "critical-fields-unconfirmed"],
+  "deletion_boundary": "skill-session-summary-only",
+  "manual_review": ["复核非最终报告没有暗示最终签约或劝退结论"]
+}

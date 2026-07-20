@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "case_id": "ae13-community-candidate",
+  "acceptance_examples": [13],
+  "rule_checks": ["community_candidate_cannot_be_red_line"],
+  "source_kind": "candidate_scenario",
+  "independent_sources": 1,
+  "official_corroboration": false,
+  "red_line_eligible": false,
+  "severity": "medium",
+  "manual_review": ["审查候选场景的适用边界和复核状态"]
+}

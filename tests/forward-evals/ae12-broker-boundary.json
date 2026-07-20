@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "case_id": "ae12-broker-boundary",
+  "acceptance_examples": [12],
+  "rule_checks": ["negotiation_requires_verified_authority"],
+  "authority_verified": false,
+  "authority_evidence_requested": true,
+  "expands_only_high_or_selected": true,
+  "preference_evidence_separated": true,
+  "manual_review": ["评估升级对象与用户成本偏好下的让步边界"]
+}

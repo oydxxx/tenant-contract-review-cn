@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "case_id": "ae01-missing-pages",
+  "acceptance_examples": [1],
+  "rule_checks": ["incomplete_requires_pause", "no_positive_or_walk_away_without_evidence"],
+  "material_complete": false,
+  "outcome": "暂停签约并核实",
+  "final_conclusion": null,
+  "evidence_ids": [],
+  "manual_review": ["确认补传清单是否覆盖被引用附件"]
+}

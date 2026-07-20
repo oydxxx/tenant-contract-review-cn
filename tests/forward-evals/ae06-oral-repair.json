@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "case_id": "ae06-oral-repair",
+  "acceptance_examples": [6],
+  "rule_checks": ["oral_response_keeps_risk_open"],
+  "counterparty_response": "oral-only",
+  "risk_resolved": false,
+  "state": "Scanned",
+  "final_conclusion": null,
+  "manual_review": ["评估书面维修条款、温和方案与最低保障的可执行性"]
+}

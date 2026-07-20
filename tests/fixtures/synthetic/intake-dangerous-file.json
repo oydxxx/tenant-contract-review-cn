@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-dangerous-file",
+  "true_type": "application/pdf",
+  "file_security": {
+    "real_type_verified": false,
+    "size_page_time_within_limit": true,
+    "isolated_parse": true,
+    "pdf_script_disabled": false,
+    "embedded_files_disabled": false,
+    "automatic_external_links_disabled": false,
+    "automatic_network_access_disabled": false,
+    "compression_bomb_blocked": false
+  },
+  "parse_status": "blocked"
+}

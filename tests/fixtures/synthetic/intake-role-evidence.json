@@ -1,0 +1,7 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-role-evidence",
+  "unknown_roles": ["agent-signing-authority", "actual-payee"],
+  "requested_fields": ["principal_name", "authority_scope", "validity_period", "payee_contract_relation", "payment_basis"],
+  "forbidden_fields": ["full_identity_number", "full_bank_card_number", "complete_title_document"]
+}

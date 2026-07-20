@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-refusal",
+  "refused": ["missing-page-2", "deposit_payment_cycle_confirmation"],
+  "covered_pages": [1, 3],
+  "current_nonfinal_findings": ["deposit clause cannot be verified"],
+  "deletion_entry": "skill-controlled-session-state"
+}

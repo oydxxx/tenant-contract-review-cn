@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-ocr-conflict",
+  "field": "deposit_payment_cycle",
+  "page_record_id": "p2",
+  "ocr_candidate": "押一付三",
+  "visible_candidate": "押二付三",
+  "ocr_confidence": 0.54,
+  "transcription_confirmation": "unconfirmed",
+  "source_reliability": "low"
+}

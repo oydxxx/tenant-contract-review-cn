@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "case_id": "synthetic-replacement",
+  "old_material_inventory_version": "inventory-v1",
+  "old_content_fingerprint": "sha256:synthetic-old",
+  "replacement": {"source_file_id": "main-contract", "page_record_id": "p2", "content_fingerprint": "sha256:synthetic-new"},
+  "downstream_records": ["field:deposit", "evidence:payment", "finding:deposit-return", "decision:overall", "negotiation:deposit" ]
+}

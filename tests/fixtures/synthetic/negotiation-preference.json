@@ -1,0 +1,4 @@
+{
+  "synthetic": true,
+  "preference_concession": {"urgency": true, "total_cost": true, "alternatives": true, "paid_amounts": false, "risk_tolerance": true}
+}

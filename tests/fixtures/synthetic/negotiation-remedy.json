@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "finding": {
+    "finding_id": "repair-time-limit",
+    "priority": "medium",
+    "remediable": true,
+    "compatible_clause_text": "出租方收到承租方书面报修后，应在24小时内响应；影响基本居住的维修应在合理期限内完成。",
+    "non_threatening_rationale": "明确响应和处理时间，便于双方安排维修并减少争议。",
+    "linked_clause_ids": ["clause-8"],
+    "linked_remedy_ids": ["remedy-repair"],
+    "annex_ids": ["annex-handover"],
+    "document_priority_terms": ["priority-1"]
+  },
+  "user_selected": false
+}

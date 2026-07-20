@@ -1,0 +1,9 @@
+{
+  "synthetic": true,
+  "identity_cases": [
+    {"counterparty_type": "landlord", "identity_verified": true, "authority_verified": false},
+    {"counterparty_type": "agent", "identity_verified": true, "authority_verified": false},
+    {"counterparty_type": "broker", "identity_verified": true, "authority_verified": false},
+    {"counterparty_type": "company", "identity_verified": true, "authority_verified": false}
+  ]
+}

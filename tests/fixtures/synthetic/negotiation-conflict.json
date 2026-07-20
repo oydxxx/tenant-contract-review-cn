@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "finding": {
+    "finding_id": "deposit-return",
+    "priority": "high",
+    "remediable": true,
+    "compatible_clause_text": "双方完成交接并结清无争议费用后，出租方应在7日内返还剩余押金并提供扣减明细。",
+    "non_threatening_rationale": "把交接和结算步骤写清，有助于双方核对押金。",
+    "linked_clause_ids": ["clause-6", "clause-12"],
+    "linked_remedy_ids": ["remedy-deposit"],
+    "annex_ids": ["annex-inventory"],
+    "document_priority_terms": ["priority-1"],
+    "conflicts": ["clause-12 caps return at 30 days"]
+  },
+  "user_selected": false
+}

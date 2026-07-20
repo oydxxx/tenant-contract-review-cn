@@ -1,0 +1,6 @@
+{
+  "synthetic": true,
+  "starting_state": "Negotiation",
+  "response": "oral-only",
+  "decision_checkpoint": "decision-v3"
+}

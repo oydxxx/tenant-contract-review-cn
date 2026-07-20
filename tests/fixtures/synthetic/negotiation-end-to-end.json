@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "starting_state": "Scanned",
+  "submitted": {
+    "main_contract": true,
+    "cited_and_prior_annexes": true,
+    "revised_pages": true,
+    "supplements": true,
+    "document_priority_agreement": true,
+    "no_other_documents_confirmed": true
+  },
+  "comparison_findings": [
+    {"finding_id": "new-penalty", "changed": true, "priority": "high", "kind": "new_high_penalty"}
+  ]
+}

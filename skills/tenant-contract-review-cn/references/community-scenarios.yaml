@@ -1,0 +1,11 @@
+schema_version: community-candidates/v1
+records:
+  - id: CS-DEPOSIT-DEDUCTION-QUESTION
+    source_kind: candidate_scenario
+    source_date: 2026-07-20
+    independent_source: Contributor-provided generalized scenario, with no person, company, address, or contract text retained.
+    mechanism: Ask whether deposit deductions, return timing, inventory, and receipts are defined in the proposed contract.
+    official_corroboration: pending; do not treat as legal basis or red line.
+    reviewer: repository-maintainer
+    expires_on: 2026-10-20
+    permitted_output: evidence request or negotiation question only

@@ -1,0 +1,44 @@
+schema_version: source-package/v1
+package_reviewed_on: 2026-07-20
+records:
+  - id: CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025
+    source_kind: legal_basis
+    authority_category: administrative_regulation
+    publisher: State Council of the People's Republic of China
+    final_domain: xzfg.moj.gov.cn
+    source_url: https://xzfg.moj.gov.cn/mobile/law/detail?LawID=1774&Query=
+    final_url_verified: true
+    redirect_chain: []
+    title: 住房租赁条例（国务院令第812号）
+    scope:
+      geography: Mainland China
+      effective_from: 2025-09-15
+      effective_to: null
+      subjects: [housing lessor, housing tenant, housing leasing enterprise, real-estate broker]
+      topics: [residential leasing, written contract, leasing compliance, information protection]
+    reviewed_on: 2026-07-20
+    review_due_on: 2026-10-20
+    status: current
+    risk_propositions:
+      - Contract review must separate verified leasing facts from unresolved authority, safety, and compliance facts.
+      - A case-specific conclusion requires checking whether the parties and transaction fall inside the source scope.
+  - id: CN-SAMR-HOUSING-LEASE-MODEL-TEXT
+    source_kind: structural_reference
+    authority_category: model_text
+    publisher: State Administration for Market Regulation
+    final_domain: htsfwb.samr.gov.cn
+    source_url: https://htsfwb.samr.gov.cn/View?id=2340996b-882d-47a4-b74d-c30784628737
+    final_url_verified: true
+    redirect_chain: []
+    title: 住房租赁合同示范文本
+    scope:
+      geography: Mainland China
+      effective_from: null
+      effective_to: null
+      subjects: [housing lessor, housing tenant]
+      topics: [contract structure, suggested clause drafting]
+    reviewed_on: 2026-07-20
+    review_due_on: 2026-10-20
+    status: current
+    risk_propositions:
+      - Missing or divergent model-text structure may support a drafting recommendation only.

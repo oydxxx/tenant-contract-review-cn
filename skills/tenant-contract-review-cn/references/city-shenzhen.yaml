@@ -1,0 +1,8 @@
+schema_version: source-package/v1
+city: Shenzhen
+coverage_status: coverage_gap
+coverage_gap:
+  - This package has not recorded a current, scope-verified Shenzhen residential-leasing overlay.
+  - Do not infer a Shenzhen local rule from an older ordinance or secondary summary; use the national base and display this gap.
+required_action: Re-verify an official current Shenzhen source before making Shenzhen-specific legal assertions.
+records: []

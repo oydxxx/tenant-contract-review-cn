@@ -1,0 +1,24 @@
+schema_version: source-package/v1
+city: Shanghai
+coverage_status: covered
+records:
+  - id: SH-HOUSING-LEASE-REGULATION-2023
+    source_kind: legal_basis
+    authority_category: local_regulation
+    publisher: Standing Committee of the Shanghai Municipal People's Congress
+    final_domain: www.shanghai.gov.cn
+    source_url: https://www.shanghai.gov.cn/bzxzlzfjbzc/20230418/8a0798aa5f444182a33065910f5b272c.html
+    final_url_verified: true
+    redirect_chain: []
+    title: 上海市住房租赁条例
+    scope:
+      geography: Shanghai Municipality
+      effective_from: 2023-02-01
+      effective_to: null
+      subjects: [housing lessor, housing tenant, housing leasing enterprise, real-estate broker]
+      topics: [residential leasing, leasing management, rental housing standards]
+    reviewed_on: 2026-07-20
+    review_due_on: 2026-10-20
+    status: current
+    risk_propositions:
+      - Shanghai-specific leasing questions require this local overlay to be checked with the national base.

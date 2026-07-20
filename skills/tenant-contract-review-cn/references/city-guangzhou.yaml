@@ -1,0 +1,24 @@
+schema_version: source-package/v1
+city: Guangzhou
+coverage_status: covered
+records:
+  - id: GZ-HOUSING-LEASE-MANAGEMENT-PROVISIONS-2020
+    source_kind: legal_basis
+    authority_category: local_regulation
+    publisher: Standing Committee of the Guangzhou Municipal People's Congress
+    final_domain: zfcj.gz.gov.cn
+    source_url: https://zfcj.gz.gov.cn/zwgk/zcfg/flfg/content/post_6866279.html
+    final_url_verified: true
+    redirect_chain: []
+    title: 广州市房屋租赁管理规定
+    scope:
+      geography: Guangzhou Municipality
+      effective_from: 2020-12-01
+      effective_to: null
+      subjects: [housing lessor, housing tenant, housing leasing enterprise, real-estate broker]
+      topics: [housing leasing, registration, rental housing safety, personal-information protection]
+    reviewed_on: 2026-07-20
+    review_due_on: 2026-10-20
+    status: current
+    risk_propositions:
+      - Guangzhou leasing review must check written-contract, registration, identity/authority, and rental-safety evidence against the local overlay.

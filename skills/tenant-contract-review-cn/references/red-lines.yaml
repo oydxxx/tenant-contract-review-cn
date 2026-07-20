@@ -1,0 +1,20 @@
+schema_version: red-lines/v1
+records:
+  - id: RL-UNVERIFIED-LESSOR-AUTHORITY
+    source_kind: red_line
+    title: 出租权限无法核实且拒绝补正
+    severity: high
+    legal_basis_ids: [CN-STATE-COUNCIL-HOUSING-LEASE-REGULATION-2025]
+    minimum_evidence: [authority-document-request, refusal-or-material-conflict]
+    counterevidence: [verifiable-ownership-or-authority-document]
+    on_refusal_result: recommend_walk_away_if_decision_gates_pass
+    uncertainty_result: pause_and_verify
+  - id: RL-RENTAL-SAFETY-NONRESIDENTIAL-SPACE
+    source_kind: red_line
+    title: 被出租为居住用途的空间存在明确安全或用途冲突
+    severity: high
+    legal_basis_ids: [GZ-HOUSING-LEASE-MANAGEMENT-PROVISIONS-2020]
+    minimum_evidence: [property-use-or-layout-evidence, material-safety-or-use-conflict]
+    counterevidence: [current-official-compliance-evidence]
+    on_refusal_result: recommend_walk_away_if_decision_gates_pass
+    uncertainty_result: pause_and_verify
